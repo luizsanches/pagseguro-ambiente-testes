@@ -17,7 +17,11 @@ else {
 	die("Nenhum dado recebido.");
 }
 
-// redirect to index
-$host = $server->getCurrentHost();
-header("Location: http://$host/");
+header("Content-Type:text/xml");
+$xml  = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
+$xml .= "<checkout>\n";
+$xml .= "  <code>" . $server->generateRandomString(36) . "</code>\n";
+$xml .= "  <date>" . date("Y-m-d") . "T" . date("H:i:sP") . "</date>\n";
+$xml .= "</checkout>\n";
+echo $xml;
 ?>
